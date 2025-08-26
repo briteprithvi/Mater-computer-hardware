@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HardwareMaster - Learn Computer Hardware</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --accent-color: #4cc9f0;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --success-color: #06ffa5;
+            --warning-color: #ffbe0b;
+            --danger-color: #f72585;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            color: var(--dark-color);
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: white !important;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 5rem 0;
+            border-radius: 0 0 30px 30px;
+            margin-bottom: 3rem;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .btn-custom {
+            background-color: var(--accent-color);
+            color: var(--dark-color);
+            font-weight: 600;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-custom:hover {
+            background-color: #3db9e0;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 70px;
+            height: 4px;
+            background-color: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-title {
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .progress-section {
+            background-color: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 3rem;
+        }
+
+        .progress-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .progress {
+            height: 10px;
+            border-radius: 5px;
+            background-color: #e9ecef;
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            border-radius: 5px;
+        }
+
+        .component-section {
+            background-color: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 3rem;
+        }
+
+        .component-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .quiz-section {
+            background-color: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 3rem;
+        }
+
+        .quiz-option {
+            background-color: #f8f9fa;
+            border: 2px solid transparent;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quiz-option:hover {
+            border-color: var(--primary-color);
+            background-color: #e9f0ff;
+        }
+
+        .quiz-option.selected {
+            border-color: var(--primary-color);
+            background-color: #e9f0ff;
+        }
+
+        .quiz-option.correct {
+            border-color: var(--success-color);
+            background-color: #d8ffe8;
+        }
+
+        .quiz-option.incorrect {
+            border-color: var(--danger-color);
+            background-color: #ffe8ee;
+        }
+
+        .footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 3rem 0;
+            margin-top: 5rem;
+        }
+
+        .footer-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .social-icons a {
+            color: white;
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: var(--accent-color);
+        }
+
+        .interactive-demo {
+            background-color: #f8f9fa;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .demo-component {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            cursor: move;
+            transition: all 0.3s ease;
+        }
+
+        .demo-component:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .demo-slot {
+            background-color: #e9ecef;
+            border: 2px dashed #adb5bd;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .demo-slot.hover {
+            border-color: var(--primary-color);
+            background-color: #e9f0ff;
+        }
+
+        .demo-slot.filled {
+            border-color: var(--success-color);
+            background-color: #d8ffe8;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            color: white;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: all 0.3s ease;
+        }
+
+        .notification.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .notification.success {
+            background-color: var(--success-color);
+            color: var(--dark-color);
+        }
+
+        .notification.error {
+            background-color: var(--danger-color);
+        }
+
+        .notification.info {
+            background-color: var(--primary-color);
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#"><i class="bi bi-cpu"></i> HardwareMaster</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#components">Components</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#progress">My Progress</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#quiz">Quiz</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#resources">Resources</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="container text-center">
+            <h1 class="hero-title">Master Computer Hardware</h1>
+            <p class="hero-subtitle">Learn everything about computer components, from CPUs to GPUs, with interactive lessons and hands-on exercises</p>
+            <a href="#components" class="btn btn-custom btn-lg">Start Learning</a>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Progress Section -->
+        <section id="progress" class="progress-section">
+            <h2 class="section-title">Your Learning Progress</h2>
+            <p class="mb-4">Track your journey through the world of computer hardware</p>
+            
+            <div class="progress-item">
+                <div class="progress-label">
+                    <span>Overall Progress</span>
+                    <span>42%</span>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar" style="width: 42%"></div>
+                </div>
+            </div>
+            
+            <div class="progress-item">
+                <div class="progress-label">
+                    <span>CPU & Motherboard</span>
+                    <span>75%</span>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar" style="width: 75%"></div>
+                </div>
+            </div>
+            
+            <div class="progress-item">
+                <div class="progress-label">
+                    <span>Memory & Storage</span>
+                    <span>30%</span>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar" style="width: 30%"></div>
+                </div>
+            </div>
+            
+            <div class="progress-item">
+                <div class="progress-label">
+                    <span>Graphics & Power</span>
+                    <span>25%</span>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar" style="width: 25%"></div>
+                </div>
+            </div>
+            
+            <div class="progress-item">
+                <div class="progress-label">
+                    <span>Peripherals & Cooling</span>
+                    <span>10%</span>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar" style="width: 10%"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Components Section -->
+        <section id="components" class="component-section">
+            <h2 class="section-title">Hardware Components</h2>
+            <p class="mb-4">Explore the essential components that make up a computer system</p>
+            
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="https://images.unsplash.com/photo-1593699588265-3eee8d0b0f3a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="CPU">
+                        <div class="card-body">
+                            <div class="component-icon">
+                                <i class="bi bi-cpu"></i>
+                            </div>
+                            <h3 class="card-title">Central Processing Unit (CPU)</h3>
+                            <p class="card-text">The brain of the computer that executes instructions and processes data.</p>
+                            <a href="#" class="btn btn-custom">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="https://images.unsplash.com/photo-1593699588265-3eee8d0b0f3a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="GPU">
+                        <div class="card-body">
+                            <div class="component-icon">
+                                <i class="bi bi-gpu-card"></i>
+                            </div>
+                            <h3 class="card-title">Graphics Processing Unit (GPU)</h3>
+                            <p class="card-text">Specialized processor for rendering images, videos, and animations.</p>
+                            <a href="#" class="btn btn-custom">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="https://images.unsplash.com/photo-1593699588265-3eee8d0b0f3a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="RAM">
+                        <div class="card-body">
+                            <div class="component-icon">
+                                <i class="bi bi-memory"></i>
+                            </div>
+                            <h3 class="card-title">Random Access Memory (RAM)</h3>
+                            <p class="card-text">Temporary storage for data that the CPU needs to access quickly.</p>
+                            <a href="#" class="btn btn-custom">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="https://images.unsplash.com/photo-1593699588265-3eee8d0b0f3a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Storage">
+                        <div class="card-body">
+                            <div class="component-icon">
+                                <i class="bi bi-hdd-stack"></i>
+                            </div>
+                            <h3 class="card-title">Storage (HDD/SSD)</h3>
+                            <p class="card-text">Permanent storage devices for the operating system, applications, and files.</p>
+                            <a href="#" class="btn btn-custom">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="https://images.unsplash.com/photo-1593699588265-3eee8d0b0f3a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Motherboard">
+                        <div class="card-body">
+                            <div class="component-icon">
+                                <i class="bi bi-motherboard"></i>
+                            </div>
+                            <h3 class="card-title">Motherboard</h3>
+                            <p class="card-text">The main circuit board that connects all components and allows communication between them.</p>
+                            <a href="#" class="btn btn-custom">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="https://images.unsplash.com/photo-1593699588265-3eee8d0b0f3a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="PSU">
+                        <div class="card-body">
+                            <div class="component-icon">
+                                <i class="bi bi-lightning-charge"></i>
+                            </div>
+                            <h3 class="card-title">Power Supply Unit (PSU)</h3>
+                            <p class="card-text">Converts AC power to DC power and supplies it to all components.</p>
+                            <a href="#" class="btn btn-custom">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Demo Section -->
+        <section class="component-section">
+            <h2 class="section-title">Interactive PC Builder</h2>
+            <p class="mb-4">Drag and drop components to build your own virtual PC</p>
+            
+            <div class="interactive-demo">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>Components</h4>
+                        <div class="demo-component" draggable="true" data-component="cpu">
+                            <i class="bi bi-cpu me-2"></i> CPU
+                        </div>
+                        <div class="demo-component" draggable="true" data-component="gpu">
+                            <i class="bi bi-gpu-card me-2"></i> GPU
+                        </div>
+                        <div class="demo-component" draggable="true" data-component="ram">
+                            <i class="bi bi-memory me-2"></i> RAM
+                        </div>
+                        <div class="demo-component" draggable="true" data-component="storage">
+                            <i class="bi bi-hdd-stack me-2"></i> Storage
+                        </div>
+                        <div class="demo-component" draggable="true" data-component="motherboard">
+                            <i class="bi bi-motherboard me-2"></i> Motherboard
+                        </div>
+                        <div class="demo-component" draggable="true" data-component="psu">
+                            <i class="bi bi-lightning-charge me-2"></i> PSU
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h4>PC Case</h4>
+                        <div class="demo-slot" data-slot="motherboard">
+                            <span>Drop Motherboard Here</span>
+                        </div>
+                        <div class="demo-slot" data-slot="cpu">
+                            <span>Drop CPU Here</span>
+                        </div>
+                        <div class="demo-slot" data-slot="ram">
+                            <span>Drop RAM Here</span>
+                        </div>
+                        <div class="demo-slot" data-slot="gpu">
+                            <span>Drop GPU Here</span>
+                        </div>
+                        <div class="demo-slot" data-slot="storage">
+                            <span>Drop Storage Here</span>
+                        </div>
+                        <div class="demo-slot" data-slot="psu">
+                            <span>Drop PSU Here</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center mt-4">
+                    <button class="btn btn-custom" id="resetDemo">Reset Demo</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quiz Section -->
+        <section id="quiz" class="quiz-section">
+            <h2 class="section-title">Test Your Knowledge</h2>
+            <p class="mb-4">Take our quiz to see how much you've learned about computer hardware</p>
+            
+            <div class="quiz-container">
+                <div class="quiz-question">
+                    <h4>Question 1 of 5</h4>
+                    <p class="fw-bold mt-3">What does CPU stand for?</p>
+                    <div class="quiz-option" data-answer="wrong">Central Processing Unit</div>
+                    <div class="quiz-option" data-answer="correct">Central Processing Unit</div>
+                    <div class="quiz-option" data-answer="wrong">Computer Processing Unit</div>
+                    <div class="quiz-option" data-answer="wrong">Central Processor Unit</div>
+                </div>
+                
+                <div class="text-center mt-4">
+                    <button class="btn btn-custom" id="nextQuestion">Next Question</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resources Section -->
+        <section id="resources" class="component-section">
+            <h2 class="section-title">Learning Resources</h2>
+            <p class="mb-4">Additional materials to deepen your understanding of computer hardware</p>
+            
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="component-icon">
+                                <i class="bi bi-book"></i>
+                            </div>
+                            <h3 class="card-title">Guides & Tutorials</h3>
+                            <p class="card-text">Step-by-step guides for building, upgrading, and troubleshooting PCs.</p>
+                            <a href="#" class="btn btn-custom">View Guides</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="component-icon">
+                                <i class="bi bi-camera-video"></i>
+                            </div>
+                            <h3 class="card-title">Video Tutorials</h3>
+                            <p class="card-text">Watch expert builders assemble computers and explain each component.</p>
+                            <a href="#" class="btn btn-custom">Watch Videos</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="component-icon">
+                                <i class="bi bi-file-earmark-pdf"></i>
+                            </div>
+                            <h3 class="card-title">Downloadable PDFs</h3>
+                            <p class="card-text">Comprehensive guides and cheat sheets for offline reference.</p>
+                            <a href="#" class="btn btn-custom">Download</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h3 class="footer-title">HardwareMaster</h3>
+                    <p>Your comprehensive guide to learning computer hardware from the ground up.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="bi bi-facebook"></i></a>
+                        <a href="#"><i class="bi bi-twitter"></i></a>
+                        <a href="#"><i class="bi bi-instagram"></i></a>
+                        <a href="#"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white-50">Home</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50">Components</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50">Progress</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50">Quiz</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50">Resources</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h3 class="footer-title">Contact Us</h3>
+                    <p class="mb-2"><i class="bi bi-envelope me-2"></i> info@hardwaremaster.com</p>
+                    <p class="mb-2"><i class="bi bi-telephone me-2"></i> +1 (555) 123-4567</p>
+                    <p><i class="bi bi-geo-alt me-2"></i> 123 Tech Street, Silicon Valley, CA</p>
+                </div>
+            </div>
+            <hr class="bg-white-50 my-4">
+            <div class="text-center">
+                <p class="mb-0">&copy; 2023 HardwareMaster. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Notification -->
+    <div id="notification" class="notification"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Interactive PC Builder Demo
+        const components = document.querySelectorAll('.demo-component');
+        const slots = document.querySelectorAll('.demo-slot');
+        const resetButton = document.getElementById('resetDemo');
+        
+        components.forEach(component => {
+            component.addEventListener('dragstart', handleDragStart);
+            component.addEventListener('dragend', handleDragEnd);
+        });
+        
+        slots.forEach(slot => {
+            slot.addEventListener('dragover', handleDragOver);
+            slot.addEventListener('drop', handleDrop);
+            slot.addEventListener('dragleave', handleDragLeave);
+        });
+        
+        let draggedComponent = null;
+        
+        function handleDragStart(e) {
+            draggedComponent = this;
+            this.style.opacity = '0.5';
+        }
+        
+        function handleDragEnd(e) {
+            this.style.opacity = '';
+        }
+        
+        function handleDragOver(e) {
+            if (e.preventDefault) {
+                e.preventDefault();
+            }
+            this.classList.add('hover');
+            return false;
+        }
+        
+        function handleDragLeave(e) {
+            this.classList.remove('hover');
+        }
+        
+        function handleDrop(e) {
+            if (e.stopPropagation) {
+                e.stopPropagation();
+            }
+            
+            this.classList.remove('hover');
+            
+            if (draggedComponent && this.dataset.slot === draggedComponent.dataset.component) {
+                this.innerHTML = draggedComponent.innerHTML;
+                this.classList.add('filled');
+                draggedComponent.style.visibility = 'hidden';
+                showNotification('Component placed correctly!', 'success');
+                checkCompletion();
+            } else {
+                showNotification('Component doesn\'t fit here!', 'error');
+            }
+            
+            return false;
+        }
+        
+        resetButton.addEventListener('click', function() {
+            slots.forEach(slot => {
+                slot.innerHTML = `<span>Drop ${slot.dataset.slot.charAt(0).toUpperCase() + slot.dataset.slot.slice(1)} Here</span>`;
+                slot.classList.remove('filled');
+            });
+            
+            components.forEach(component => {
+                component.style.visibility = 'visible';
+            });
+            
+            showNotification('Demo reset successfully!', 'info');
+        });
+        
+        function checkCompletion() {
+            const filledSlots = document.querySelectorAll('.demo-slot.filled');
+            if (filledSlots.length === slots.length) {
+                showNotification('Congratulations! You\'ve built a complete PC!', 'success');
+            }
+        }
+
+        // Quiz functionality
+        const quizOptions = document.querySelectorAll('.quiz-option');
+        const nextButton = document.getElementById('nextQuestion');
+        
+        quizOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                // Remove previous selections
+                quizOptions.forEach(opt => {
+                    opt.classList.remove('selected', 'correct', 'incorrect');
+                });
+                
+                // Mark selected option
+                this.classList.add('selected');
+                
+                // Check if answer is correct
+                if (this.dataset.answer === 'correct') {
+                    setTimeout(() => {
+                        this.classList.add('correct');
+                        showNotification('Correct answer!', 'success');
+                    }, 300);
+                } else {
+                    setTimeout(() => {
+                        this.classList.add('incorrect');
+                        // Find and highlight correct answer
+                        quizOptions.forEach(opt => {
+                            if (opt.dataset.answer === 'correct') {
+                                opt.classList.add('correct');
+                            }
+                        });
+                        showNotification('Incorrect answer. Try again!', 'error');
+                    }, 300);
+                }
+            });
+        });
+        
+        nextButton.addEventListener('click', function() {
+            // In a real application, this would load the next question
+            showNotification('Loading next question...', 'info');
+            // Simulate loading next question
+            setTimeout(() => {
+                quizOptions.forEach(opt => {
+                    opt.classList.remove('selected', 'correct', 'incorrect');
+                });
+                showNotification('Next question loaded!', 'success');
+            }, 1000);
+        });
+
+        // Notification system
+        function showNotification(message, type) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = 'notification ' + type;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Simulate progress updates
+        window.addEventListener('scroll', function() {
+            const progressBars = document.querySelectorAll('.progress-bar');
+            progressBars.forEach(bar => {
+                const barTop = bar.getBoundingClientRect().top;
+                const barBottom = bar.getBoundingClientRect().bottom;
+                
+                if (barTop < window.innerHeight && barBottom > 0) {
+                    const width = bar.style.width;
+                    bar.style.width = '0%';
+                    setTimeout(() => {
+                        bar.style.width = width;
+                    }, 200);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
